@@ -7,7 +7,7 @@ import Multer from "multer";
 import serviceAccount from "./graphql-gram-94075-firebase-adminsdk-ejim3-44c474bfe5.json";
 import cors from "cors";
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 8001;
 const connect_string = `mongodb+srv://${process.env.MONGO_USER}:${
   process.env.MONGO_PASSWORD
 }@cluster0-cjli2.mongodb.net/graphqlGram?retryWrites=true&w=majority`;
@@ -30,7 +30,7 @@ const bucket = admin.storage().bucket();
 app.set("bucket", bucket);
 app.use(cors());
 app.use(express.json()); // for parsing application/json
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({extended: true}));
 
 app.use("/api/upload", verify, multer.single("file"), upload);
 
@@ -44,10 +44,7 @@ app.use((err, req, res, next) => {
 });
 
 mongoose
-  .connect(
-    connect_string,
-    { useNewUrlParser: true }
-  )
+  .connect(connect_string, {useNewUrlParser: true})
   .then(() => {
     app.listen(port, () => console.log("server running on port ", port));
   })

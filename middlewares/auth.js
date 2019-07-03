@@ -24,7 +24,8 @@ const verify = (req, res, next) => {
     error = new Error("Unable to authenticat with token");
     next(error);
   }
-  //console.log(decoded);
+  console.log(decoded);
+  res.locals.userId = decoded.userId;
   next();
 };
 
